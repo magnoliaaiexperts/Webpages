@@ -1,0 +1,232 @@
+<?php
+/**
+ * Template Name: AVA Landing Page
+ *
+ * This is the template that displays all sections of the AVA landing page,
+ * primarily using shortcodes provided by the AVA Landing Page Optimizer plugin.
+ *
+ * @link https://developer.wordpress.org/themes/template-files-section/page-template-files/
+ *
+ * @package YourThemeName  // Replace YourThemeName with your actual theme name
+ */
+
+get_header(); // Loads the theme's header.php file
+?>
+
+<main id="primary" class="site-main ava-landing-page-main">
+
+    <?php
+    // Ensure the particles background shortcode is called once, typically at the beginning.
+    // The plugin should handle enqueuing scripts for particles.js.
+    echo do_shortcode('[ava_particles_bg]'); 
+    ?>
+
+    <!-- Header Section (Home) -->
+    <?php
+    // For the main header section, you might output HTML directly here if it's complex,
+    // or create a more comprehensive shortcode in your plugin.
+    // For simplicity, this example assumes a shortcode [ava_header_section] could exist.
+    // If not, you'd replicate the HTML structure from your static page here,
+    // making content dynamic via custom fields or theme options.
+
+    // Example: If you created an [ava_hero_section] shortcode in your plugin:
+    // echo do_shortcode('[ava_hero_section]');
+
+    // For now, let's assume the HTML structure from your static page for the header
+    // would be manually placed here or fetched from theme options/custom fields.
+    // This is a placeholder to represent where your full header content would go.
+    // The actual dynamic content (logo text, hero title, typed strings, background image)
+    // should ideally be managed via the Customizer, ACF, or plugin settings.
+    ?>
+    <header id="home" class="ava-section">
+        <div class="floating-elements">
+            <div class="floating-badge pulse-highlight"> 
+                <span>$99</span>
+                <span></span> <!-- Ensure this matches your latest HTML for the badge -->
+            </div>
+        </div>
+        <div class="container">
+            <div class="logo">
+                <a href="<?php echo esc_url(home_url('/')); ?>#home"> 
+                    <span><?php echo esc_html(get_theme_mod('ava_logo_main_text', 'AVA')); ?></span>
+                    <span><?php echo esc_html(get_theme_mod('ava_logo_sub_text', 'AI Virtual Agent')); ?></span> 
+                </a>
+            </div>
+            <div class="hero">
+                <h1 class="slide-up"><?php echo esc_html(get_theme_mod('ava_hero_title', 'Tired of Missed Calls & Lost Leads?')); ?></h1> 
+                <p id="typed-subtitle-container" class="slide-up"><span id="typed-subtitle"></span></p> 
+                <p class="hero-description slide-up"><?php echo esc_html(get_theme_mod('ava_hero_description', 'For Lafayette business owners, every missed call is a missed opportunity. Your AI Virtual Agent, AVA, works 24/7 to engage customers, answer questions, and capture leads, turning every inquiry into a chance for growth.')); ?></p> 
+                <div class="hero-features slide-up">
+                    <div><span><?php echo esc_html(get_theme_mod('ava_hero_feature_1', 'Capture Every Lead')); ?></span></div>
+                    <div><span><?php echo esc_html(get_theme_mod('ava_hero_feature_2', 'Instant Customer Answers')); ?></span></div>
+                    <div><span><?php echo esc_html(get_theme_mod('ava_hero_feature_3', 'Save Time & Money')); ?></span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features ava-section" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="fade-in"><?php echo esc_html(get_theme_mod('ava_features_title', 'Why Choose an AI Virtual Agent?')); ?></h2>
+                <p class="fade-in"><?php echo esc_html(get_theme_mod('ava_features_subtitle', 'Stop stretching your team thin. Start working smarter.')); ?></p>
+            </div>
+            <?php 
+            // You would ideally loop through features from Custom Post Type, ACF Repeater, or Theme Options
+            // Or create a more complex shortcode like [ava_features_grid]
+            ?>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💰</div>
+                    <h3><?php echo esc_html(get_theme_mod('ava_feature_1_title', 'Increase Revenue')); ?></h3>
+                    <p><?php echo esc_html(get_theme_mod('ava_feature_1_text', 'AVA never sleeps, ensuring you capture leads and inquiries from night owls and early birds alike.')); ?></p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🕒</div>
+                    <h3><?php echo esc_html(get_theme_mod('ava_feature_2_title', 'Reclaim Your Time')); ?></h3>
+                    <p><?php echo esc_html(get_theme_mod('ava_feature_2_text', 'Let your AI agent handle routine questions so you and your team can focus on high-value tasks.')); ?></p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">😊</div>
+                    <h3><?php echo esc_html(get_theme_mod('ava_feature_3_title', 'Improve Satisfaction')); ?></h3>
+                    <p><?php echo esc_html(get_theme_mod('ava_feature_3_text', 'Provide instant, accurate answers to your customers, improving their experience with your brand.')); ?></p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⚡</div>
+                    <h3><?php echo esc_html(get_theme_mod('ava_feature_4_title', 'Go Live in Days')); ?></h3>
+                    <p><?php echo esc_html(get_theme_mod('ava_feature_4_text', 'Our team at Magnolia AI Experts will have your agent customized for your Lafayette business, fast.')); ?></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promo Section -->
+    <section id="promo" class="ava-section">
+        <div class="container">
+             <?php 
+            // Example: If you created an [ava_promo_section] shortcode in your plugin
+            // echo do_shortcode('[ava_promo_section]'); 
+            // For now, direct HTML with theme_mod examples:
+            ?>
+            <div class="promotion fade-in">
+                <h2><?php echo esc_html(get_theme_mod('ava_promo_title', 'Our Final Summer Slots for Lafayette!')); ?></h2>
+                <p class="price-anchor">Regular Price: <s>$<?php echo esc_html(get_theme_mod('ava_promo_regular_price', '249')); ?>/mo</s></p>
+                <p><?php echo esc_html(get_theme_mod('ava_promo_text', 'To support our local business community, the first 20 Lafayette businesses to sign up before August 31st get our complete AI Virtual Agent package for just $99! Lock in this rate. No hidden fees.')); ?></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works ava-section" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="fade-in"><?php echo esc_html(get_theme_mod('ava_howitworks_title', 'Your Path to Automation')); ?></h2>
+            </div>
+            <?php 
+            // Example: If you created an [ava_how_it_works_steps] shortcode
+            // echo do_shortcode('[ava_how_it_works_steps]');
+            // For now, direct HTML with theme_mod examples for steps:
+            ?>
+            <div class="steps">
+                 <div class="step fade-in">
+                    <h3><?php echo esc_html(get_theme_mod('ava_step1_title', '1. Secure Your Spot')); ?></h3>
+                    <p><?php echo esc_html(get_theme_mod('ava_step1_text', 'Click "Get Started" and fill out a brief profile to claim your $99 Lafayette-exclusive offer.')); ?></p>
+                </div>
+                <div class="step fade-in" data-delay="0.2"> 
+                    <h3><?php echo esc_html(get_theme_mod('ava_step2_title', '2. We Personalize AVA')); ?></h3>
+                    <p><?php echo esc_html(get_theme_mod('ava_step2_text', 'Our local experts will tailor your AI to your business\'s voice, services, and specific needs.')); ?></p>
+                </div>
+                <div class="step fade-in" data-delay="0.4">
+                    <h3><?php echo esc_html(get_theme_mod('ava_step3_title', '3. Launch & Grow')); ?></h3>
+                    <p><?php echo esc_html(get_theme_mod('ava_step3_text', 'Start converting more leads and saving time as your AI agent works for you 24/7.')); ?></p> 
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials ava-section" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="fade-in"><?php echo esc_html(get_theme_mod('ava_testimonials_title', 'Real Results for Lafayette Businesses')); ?></h2>
+            </div>
+            <?php 
+            // Example: If you created an [ava_testimonials_section] shortcode
+            // echo do_shortcode('[ava_testimonials_section]');
+            // For now, direct HTML with theme_mod for a single testimonial and stats:
+            ?>
+            <div class="testimonial-container">
+                <div class="testimonial fade-in"> 
+                    <p>"<?php echo esc_html(get_theme_mod('ava_testimonial_1_quote', 'AVA from Magnolia AI Experts isn\'t just a chatbot, it\'s a core part of our team. In the first month, we\'ve seen a 30% increase in qualified leads because we\'re no longer missing after-hours inquiries. It\'s a game-changer for any local business in Lafayette.')); ?>"</p> 
+                    <div class="testimonial-author">- <?php echo esc_html(get_theme_mod('ava_testimonial_1_author', 'Jonathan J. / Local Business Owner, Lafayette, LA')); ?></div>
+                </div>
+                <div class="stats-container fade-in">
+                    <div class="stat-counter efficiency"> 
+                        <div><span id="efficiency-counter">0</span>%</div>
+                        <div><?php echo esc_html(get_theme_mod('ava_stat_1_label', 'Increase in Lead Capture')); ?></div>
+                    </div>
+                    <div class="stat-counter satisfaction"> 
+                        <div><span id="satisfaction-counter">0</span>%</div>
+                        <div><?php echo esc_html(get_theme_mod('ava_stat_2_label', 'Higher Client Satisfaction')); ?></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="experience ava-section" id="experience-demo">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="fade-in"><?php echo esc_html(get_theme_mod('ava_demo_title', 'Experience AVA in Action')); ?></h2>
+                <p class="fade-in"><?php echo esc_html(get_theme_mod('ava_demo_subtitle', 'Ask our live demo how AI can solve your biggest business headaches.')); ?></p> 
+            </div>
+             <?php 
+            // Example: If you created an [ava_demo_section] shortcode
+            // echo do_shortcode('[ava_demo_section]');
+            // For now, direct HTML with theme_mod examples:
+            ?>
+            <div class="demo-container fade-in">
+                <div class="demo-text-content">
+                    <h3><?php echo esc_html(get_theme_mod('ava_demo_content_title', 'Talk to Our AI Virtual Agent')); ?></h3> 
+                    <p><?php echo esc_html(get_theme_mod('ava_demo_content_text', 'This is a live demo of AVA\'s conversational capabilities. Challenge it! Ask about our $99 special for Lafayette businesses or how it can help your specific industry.')); ?></p> 
+                    <ul>
+                        <li><span>✓</span> <?php echo esc_html(get_theme_mod('ava_demo_bullet_1', 'Ask "How can you help a plumber?"')); ?></li>
+                        <li><span>✓</span> <?php echo esc_html(get_theme_mod('ava_demo_bullet_2', 'Inquire about the Lafayette $99 offer')); ?></li>
+                        <li><span>✓</span> <?php echo esc_html(get_theme_mod('ava_demo_bullet_3', 'See how it handles complex questions')); ?></li>
+                    </ul>
+                </div>
+                <div class="demo-iframe-container">
+                    <iframe title="Chatbot Demo" src="<?php echo esc_url(get_theme_mod('ava_demo_iframe_src', 'https://www.chatbase.co/chatbot-iframe/BcoZ5tUDywN_6BEC5Xryj')); ?>" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section (using the shortcode from your plugin) -->
+    <?php 
+    // Using the shortcode from your plugin for the CTA.
+    // You can pass attributes to override defaults, e.g.:
+    // echo do_shortcode('[ava_cta_section title="New CTA Title" button_text="Click Here!"]');
+    echo do_shortcode('[ava_cta_section]'); 
+    ?>
+
+    <?php
+    // If you have an alternative signup form that was part of the static HTML:
+    // You would typically handle its display logic (e.g., via JS or a specific condition)
+    // and integrate its submission with a WordPress form plugin or custom AJAX handler.
+    // For simplicity, it's omitted here but could be added as another shortcode or direct HTML.
+    /*
+    <form class="signup-form" id="contact-form" style="display:none;"> 
+        <div class="section-title"><h2>Get Started (Alternative Form)</h2></div>
+        ... (form fields) ...
+    </form>
+    */
+    ?>
+
+</main><!-- #main -->
+
+<?php
+get_footer(); // Loads the theme's footer.php file
+?>

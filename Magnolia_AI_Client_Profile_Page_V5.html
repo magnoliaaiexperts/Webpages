@@ -1,0 +1,2182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnolia AI Solutions - Client Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Base Styles & Container (Mobile-First Approach) */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            /* UPDATED: Background image URL changed */
+            /* A fallback color is set in case the new URL also has issues or is slow to load. */
+            background-image: url('https://magnoliaaiexperts.com/wp-content/uploads/2025/03/background-1.webp');
+            background-color: #f3f4f6; /* Fallback gray-100 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #333;
+            margin: 0; /* Ensure no default body margin */
+            padding: 0; /* Ensure no default body padding */
+        }
+
+        .magnolia-client-profile-container *,
+        .magnolia-client-profile-container *::before,
+        .magnolia-client-profile-container *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .magnolia-client-profile-container {
+            max-width: 800px; /* Max width for larger screens */
+            margin: 20px auto; /* Adjusted margin for mobile */
+            color: #334155; /* Slate 700 */
+            line-height: 1.6;
+            padding: 15px; /* Mobile padding */
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .magnolia-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.07), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        .magnolia-card-header {
+            background: linear-gradient(110deg, #4f46e5, #7c3aed);
+            color: white;
+            font-size: 1.25rem; /* Adjusted for mobile */
+            font-weight: 600;
+            padding: 1rem 1.25rem; /* Adjusted for mobile */
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .magnolia-card-body {
+            padding: 1.25rem; /* Mobile padding */
+        }
+
+        /* Value Banner */
+        .magnolia-value-banner {
+            display: flex;
+            flex-direction: column; /* Stack on mobile */
+            align-items: flex-start;
+            background-color: #f0f9ff;
+            color: #075985;
+            padding: 1rem; /* Mobile padding */
+            border-radius: 8px;
+            margin-bottom: 1.5rem; /* Mobile margin */
+            border-left: 5px solid #0ea5e9;
+        }
+
+        .magnolia-value-icon {
+            font-size: 1.5rem; /* Mobile size */
+            margin-right: 0; /* No right margin when stacked */
+            margin-bottom: 0.5rem; /* Space below icon on mobile */
+            color: #0ea5e9;
+        }
+
+        .magnolia-value-content h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem; /* Mobile size */
+            font-weight: 600;
+            color: #0369a1;
+        }
+
+        .magnolia-value-content p {
+            font-size: 0.875rem; /* Mobile size */
+            color: #075985;
+            line-height: 1.5;
+        }
+
+        /* Progress Bar */
+        .magnolia-progress-container {
+            margin-bottom: 1.5rem; /* Mobile margin */
+        }
+
+        .magnolia-progress-bar {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 0.5rem; /* Mobile margin */
+        }
+
+        .magnolia-progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 16px; /* Adjust for smaller step size */
+            right: 16px; /* Adjust for smaller step size */
+            height: 3px; /* Thinner line for mobile */
+            background-color: #e2e8f0;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .magnolia-progress-step {
+            width: 32px; /* Smaller steps for mobile */
+            height: 32px;
+            border-radius: 50%;
+            background-color: #e2e8f0;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.75rem; /* Smaller font for mobile */
+            position: relative;
+            z-index: 2;
+            border: 2px solid #e2e8f0; /* Thinner border */
+            transition: all 0.4s ease;
+        }
+
+        .magnolia-progress-step.active {
+            background-color: #6366f1;
+            color: white;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25); /* Smaller shadow */
+        }
+
+        .magnolia-progress-step.completed {
+            background-color: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        .magnolia-progress-labels {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 2px; /* Adjust padding */
+        }
+
+        .magnolia-progress-labels span {
+            font-size: 0.6875rem; /* 11px, smaller for mobile */
+            color: #475569;
+            text-align: center;
+            width: 19%;
+            line-height: 1.2; /* Adjust line height */
+            transition: color 0.3s ease, font-weight 0.3s ease; /* Smooth transition for active state */
+        }
+        /* Neuromarketing: Highlight active progress label */
+        .magnolia-progress-labels span.active-label {
+            font-weight: 700; /* Bolder for active */
+            color: #6366f1; /* Indigo 500 */
+        }
+
+
+        /* Quick Options */
+        .magnolia-quick-options {
+            display: flex;
+            flex-direction: column; /* Stack on mobile */
+            align-items: center; /* Center items on mobile */
+            text-align: center; /* Center text on mobile */
+            gap: 0.75rem; /* Mobile gap */
+            background-color: #f1f5f9;
+            padding: 1rem; /* Mobile padding */
+            border-radius: 8px;
+            margin-bottom: 1.5rem; /* Mobile margin */
+        }
+
+        .magnolia-quick-option-text p {
+            font-size: 0.875rem; /* Mobile size */
+            font-weight: 500;
+            color: #475569;
+            margin-bottom: 0.5rem; /* Add space if button is below */
+        }
+
+        .magnolia-btn-demo {
+            background-color: #475569;
+            color: white;
+            border: none;
+            padding: 0.625rem 1rem; /* Mobile padding */
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.875rem; /* Mobile size */
+            transition: all 0.3s;
+            white-space: nowrap;
+            width: 100%; /* Full width on mobile */
+            max-width: 280px; /* Max width for the button */
+        }
+
+        .magnolia-btn-demo:hover {
+            background-color: #334155;
+            transform: translateY(-1px);
+        }
+
+        /* Trust Indicators */
+        .magnolia-trust-indicators {
+            display: flex;
+            flex-direction: column; /* Stack on mobile */
+            gap: 0.75rem; /* Mobile gap */
+            margin-bottom: 1.5rem; /* Mobile margin */
+        }
+
+        .magnolia-security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center content on mobile */
+            background-color: #f8fafc;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            width: 100%; /* Full width on mobile */
+            font-size: 0.875rem;
+            color: #475569;
+        }
+         /* Neuromarketing: Subtle highlight for client count */
+        .magnolia-clients-count {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #eef2ff; /* Indigo-50 for subtle highlight */
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #c7d2fe; /* Indigo-200 border */
+            width: 100%;
+            font-size: 0.875rem;
+            color: #4338ca; /* Indigo-700 text for better contrast on light indigo bg */
+        }
+        .magnolia-clients-count strong {
+             color: #3730a3; /* Indigo-800 for strong */
+        }
+
+
+        .magnolia-security-icon, .magnolia-counter-icon {
+            font-size: 1.25rem;
+            margin-right: 0.625rem;
+            color: #6366f1;
+            line-height: 1;
+        }
+        .magnolia-clients-count .magnolia-counter-icon {
+             color: #4f46e5; /* Indigo-600 for icon on highlighted bg */
+        }
+
+
+        /* Testimonials */
+        .magnolia-social-proof {
+            margin-bottom: 1.5rem; /* Mobile margin */
+        }
+
+        .magnolia-testimonial-slider {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1rem; /* Mobile margin */
+            background-color: #f1f5f9;
+            padding: 1.25rem; /* Mobile padding */
+            border-radius: 8px;
+        }
+
+        .magnolia-testimonial-slide {
+            display: none;
+            animation: fadeInTestimonial 0.6s ease-in-out;
+        }
+
+        @keyframes fadeInTestimonial {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .magnolia-testimonial-content {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 1.25rem; /* Mobile padding */
+            box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .magnolia-testimonial-quote {
+            font-style: italic;
+            margin-bottom: 1rem; /* Mobile margin */
+            color: #475569;
+            line-height: 1.6; /* Adjusted line height */
+            font-size: 0.9375rem; /* Mobile size */
+            position: relative;
+        }
+
+        .magnolia-testimonial-quote::before {
+            content: '"';
+            position: absolute;
+            left: -0.75rem; /* Adjust for mobile */
+            top: -0.25rem; /* Adjust for mobile */
+            font-size: 2.5rem; /* Adjust for mobile */
+            color: #e2e8f0;
+            z-index: 0;
+            line-height: 1;
+        }
+
+        .magnolia-testimonial-author {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .magnolia-author-avatar {
+            width: 40px; /* Mobile size */
+            height: 40px;
+            background-color: #4338ca;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem; /* Mobile size */
+            margin-right: 0.75rem; /* Mobile margin */
+            flex-shrink: 0;
+        }
+
+        .magnolia-author-info {
+            text-align: left;
+        }
+
+        .magnolia-author-name {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.875rem; /* Mobile size */
+        }
+
+        .magnolia-author-role {
+            font-size: 0.75rem; /* Mobile size */
+            color: #64748b;
+        }
+
+        .magnolia-testimonial-dots {
+            display: flex;
+            justify-content: center;
+        }
+
+        .magnolia-dot {
+            width: 10px; /* Mobile size */
+            height: 10px;
+            background-color: #cbd5e1;
+            border-radius: 50%;
+            margin: 0 5px; /* Mobile margin */
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .magnolia-dot:hover { background-color: #94a3b8; transform: scale(1.1); }
+        .magnolia-dot.active { background-color: #6366f1; transform: scale(1.1); }
+
+        /* Completion Indicator */
+        .magnolia-completion-indicator { margin-bottom: 1.5rem; }
+        .magnolia-progress-wrapper { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .magnolia-progress-text { font-weight: 500; font-size: 0.875rem; color: #475569; }
+        .magnolia-progress-percentage { font-weight: 600; font-size: 0.875rem; color: #6366f1; }
+        .magnolia-progress-outer { width: 100%; height: 8px; background-color: #e2e8f0; border-radius: 4px; overflow: hidden; } /* Thinner bar */
+        .magnolia-progress-inner { height: 100%; background: linear-gradient(90deg, #6366f1, #8b5cf6); border-radius: 4px; transition: width 0.5s ease-in-out; }
+
+        /* Form Styles */
+        .magnolia-form-section { display: none; padding-top: 1rem; border-top: 1px solid #e2e8f0; margin-top: 1rem; }
+        .magnolia-form-section:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+        .magnolia-form-section.active { display: block; animation: fadeInSection 0.5s ease-out; }
+        @keyframes fadeInSection { from { opacity: 0; } to { opacity: 1; } }
+
+        .magnolia-form-section h3 { margin-bottom: 1.25rem; color: #1e293b; font-size: 1.25rem; font-weight: 600; padding-bottom: 0.5rem; border-bottom: 2px solid #6366f1; display: inline-block; }
+        .magnolia-form-group { margin-bottom: 1.25rem; } /* Default mobile margin */
+        
+        .magnolia-form-row { display: flex; flex-direction: column; /* Stack by default */ gap: 0; margin-bottom: 0; }
+        .magnolia-form-row .magnolia-form-group { margin-bottom: 1.25rem; min-width: 100%; }
+        .magnolia-form-row .magnolia-form-group:last-child { margin-bottom: 0; } /* Remove margin from last item in a stacked row */
+
+
+        label { display: block; margin-bottom: 0.5rem; font-weight: 500; font-size: 0.875rem; color: #334155; }
+        label.required::after { content: ' *'; color: #ef4444; margin-left: 2px; }
+        label.invalid-label { color: #ef4444; }
+
+        input[type="text"], input[type="email"], input[type="tel"], input[type="url"], select, textarea {
+            width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 6px;
+            background-color: #f8fafc; color: #334155; font-size: 0.9375rem; transition: all 0.2s ease;
+        }
+        input::placeholder, textarea::placeholder { color: #94a3b8; font-size: 0.9375rem; }
+        input:focus, select:focus, textarea:focus { border-color: #6366f1; outline: none; box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2); background-color: #ffffff; }
+        input.invalid, select.invalid, textarea.invalid { border-color: #ef4444; background-color: #fee2e2; }
+        input[type="checkbox"].invalid { outline: 2px solid #f87171; outline-offset: 1px; }
+        .error-message { color: #dc2626; font-size: 0.8125rem; margin-top: 0.375rem; display: block; }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2364748B'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd' /%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1.2em 1.2em; padding-right: 2.5rem;
+        }
+
+        .magnolia-checkbox-group { margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.75rem; }
+        .magnolia-checkbox-item { display: flex; align-items: center; position: relative; }
+        .magnolia-checkbox-item input[type="checkbox"] { margin-right: 0.75rem; width: 1.125rem; height: 1.125rem; cursor: pointer; accent-color: #6366f1; flex-shrink: 0; }
+        .magnolia-checkbox-item label { margin-bottom: 0; font-weight: 400; color: #475569; cursor: pointer; font-size: 0.9375rem; line-height: 1.4; }
+        .conditional-input { margin-top: 0.625rem; margin-left: calc(1.125rem + 0.75rem); display: none; width: calc(100% - (1.125rem + 0.75rem)); }
+
+        /* Lead Magnet */
+        .magnolia-lead-magnet { margin: 1.5rem 0; }
+        .magnolia-lead-magnet-banner { display: flex; align-items: flex-start; background: linear-gradient(135deg, #ecfdf5, #d1fae5); padding: 1.25rem; border-radius: 8px; color: #065f46; border: 1px solid #a7f3d0; }
+        .magnolia-lead-magnet-icon { font-size: 1.75rem; margin-right: 1rem; color: #10b981; margin-top: 3px; }
+        .magnolia-lead-magnet-info h4 { margin-top: 0; margin-bottom: 0.5rem; font-size: 1.125rem; font-weight: 600; color: #047857; }
+        .magnolia-lead-magnet-info p { margin-bottom: 0.75rem; font-size: 0.875rem; color: #065f46; line-height: 1.6; }
+        .magnolia-lead-magnet .magnolia-checkbox-item label { color: #065f46; font-weight: 500; }
+        .magnolia-lead-magnet .magnolia-checkbox-item input[type="checkbox"] { accent-color: #10b981; }
+
+        /* Form Note */
+        .magnolia-form-note { background-color: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem; margin: 1.25rem 0; font-size: 0.875rem; border-radius: 0 4px 4px 0; }
+        .magnolia-form-note p { margin: 0; color: #78350f; line-height: 1.5; }
+        .magnolia-form-note strong { color: #92400e; font-weight: 600; }
+
+        /* Buttons */
+        .magnolia-buttons { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; }
+        
+        .magnolia-btn-save, .magnolia-btn-prev, .magnolia-btn-next, .magnolia-btn-submit, .magnolia-btn-continue, .magnolia-modal-btn {
+            padding: 0.75rem 1.25rem; border-radius: 6px; font-weight: 600; font-size: 0.9375rem; cursor: pointer;
+            transition: all 0.2s ease; border: none; text-align: center; line-height: 1.5; width: 100%; /* Full width on mobile */
+        }
+
+        .magnolia-btn-save:disabled, .magnolia-btn-prev:disabled, .magnolia-btn-next:disabled, .magnolia-btn-submit:disabled, .magnolia-btn-continue:disabled, .magnolia-modal-btn:disabled {
+            opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none;
+        }
+
+        .magnolia-btn-save, .magnolia-btn-prev, .magnolia-modal-btn.secondary {
+            background-color: #f1f5f9; color: #475569; border: 1px solid #e2e8f0;
+        }
+        .magnolia-btn-save:hover:not(:disabled), .magnolia-btn-prev:hover:not(:disabled), .magnolia-modal-btn.secondary:hover:not(:disabled) {
+            background-color: #e2e8f0; border-color: #cbd5e1; transform: translateY(-1px);
+        }
+
+        .magnolia-btn-next, .magnolia-btn-continue, .magnolia-modal-btn.primary {
+            background-color: #6366f1; color: white; box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.1); order: -1; /* Next/Primary buttons first in column */
+        }
+        .magnolia-btn-next:hover:not(:disabled), .magnolia-btn-continue:hover:not(:disabled), .magnolia-modal-btn.primary:hover:not(:disabled) {
+            background-color: #4f46e5; box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.1); transform: translateY(-2px);
+        }
+        .magnolia-btn-submit {
+            background: linear-gradient(110deg, #6366f1, #a855f7); color: white; 
+            box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.1); 
+            order: -1; /* Submit button first */
+        }
+        .magnolia-btn-submit:hover:not(:disabled) { 
+            background: linear-gradient(110deg, #4f46e5, #9333ea); 
+            /* Neuromarketing: Enhanced hover shadow for primary CTA */
+            box-shadow: 0 12px 20px -3px rgba(99, 102, 241, 0.15), 0 4px 6px -2px rgba(99, 102, 241, 0.1);
+            transform: translateY(-2px); 
+        }
+        
+        .magnolia-modal-actions { display: flex; flex-direction: column-reverse; gap: 0.75rem; margin-top: 1.5rem; }
+        .magnolia-modal-actions .magnolia-modal-btn { width: 100%; }
+
+
+        /* Final CTA */
+        .magnolia-final-cta { display: flex; flex-direction: column; text-align: center; align-items: center; background: linear-gradient(135deg, #1e3a8a, #5b21b6); padding: 1.25rem; border-radius: 8px; color: white; margin: 1.5rem 0; }
+        .magnolia-cta-icon { font-size: 1.75rem; margin-right: 0; margin-bottom: 0.75rem; }
+        .magnolia-cta-content h4 { margin-bottom: 0.5rem; font-size: 1.125rem; font-weight: 600; }
+        .magnolia-cta-content p { margin: 0; font-size: 0.875rem; opacity: 0.9; line-height: 1.6; }
+        /* Neuromarketing: Emphasize value in final CTA */
+        .magnolia-cta-content p strong { font-weight: 600; opacity: 1; }
+
+
+        /* Confirmation Screen */
+        .magnolia-confirmation { text-align: center; padding: 2rem 1rem; animation: fadeInSection 0.5s ease-out; }
+        .magnolia-confirmation.hidden { display: none; }
+        .magnolia-confirmation-icon { font-size: 3.5rem; color: #22c55e; margin-bottom: 1rem; line-height: 1; }
+        .magnolia-confirmation h2 { color: #1e293b; margin-bottom: 0.75rem; font-size: 1.5rem; font-weight: 600; }
+        .magnolia-confirmation p { color: #475569; font-size: 0.9375rem; max-width: 600px; margin: 0 auto 1rem auto; line-height: 1.6; }
+        .magnolia-confirmation-message { font-weight: 500; }
+        .magnolia-what-next { background-color: #f8fafc; border-radius: 8px; padding: 1.25rem; margin: 1.5rem 0; text-align: left; border: 1px solid #e2e8f0; }
+        .magnolia-what-next h3 { margin-bottom: 1rem; color: #334155; font-size: 1.125rem; font-weight: 600; }
+        .magnolia-what-next ol { padding-left: 1.25rem; margin: 0; }
+        .magnolia-what-next li { margin-bottom: 0.625rem; color: #475569; font-size: 0.875rem; line-height: 1.6; }
+        .magnolia-what-next li strong { color: #1e3a8a; font-weight: 600; }
+        .magnolia-what-next li:last-child { margin-bottom: 0; }
+        .magnolia-social-share { margin: 1.5rem 0; padding-top: 1rem; border-top: 1px solid #e2e8f0; }
+        .magnolia-social-share p { font-size: 0.875rem; color: #475569; margin-bottom: 0.75rem; font-weight: 500; }
+        .magnolia-share-buttons { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 0.75rem; } /* Stack share buttons */
+        .magnolia-share-btn { background-color: #0ea5e9; color: white; border: none; padding: 0.625rem 1rem; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.875rem; display: inline-flex; align-items: center; justify-content: center; transition: all 0.2s; width: 100%;}
+        .magnolia-share-btn:hover { background-color: #0284c7; transform: translateY(-1px); }
+        .magnolia-confirmation a.magnolia-btn-next { margin-top: 1rem; display: inline-block; width: 100%; }
+
+        /* Modal Styles */
+        .magnolia-modal { display: none; position: fixed; inset: 0; background-color: rgba(15, 23, 42, 0.7); z-index: 1000; justify-content: center; align-items: center; padding: 1rem; opacity: 0; transition: opacity 0.3s ease; }
+        .magnolia-modal.show { opacity: 1; }
+        .magnolia-modal-content { background-color: white; padding: 1.5rem; border-radius: 12px; max-width: 550px; width: 100%; position: relative; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); transform: scale(0.95); transition: transform 0.3s ease; }
+        .magnolia-modal.show .magnolia-modal-content { transform: scale(1); }
+        .magnolia-modal-close { position: absolute; top: 0.5rem; right: 0.5rem; font-size: 1.5rem; color: #94a3b8; cursor: pointer; transition: all 0.2s; line-height: 1; padding: 0.5rem; background: none; border: none; }
+        .magnolia-modal-close:hover { color: #334155; transform: rotate(90deg); }
+        .magnolia-modal h3 { margin-bottom: 1rem; color: #1e293b; font-size: 1.25rem; font-weight: 600; }
+        .magnolia-modal p { margin-bottom: 1.25rem; color: #475569; font-size: 0.875rem; line-height: 1.6; }
+        #demoRequestForm .magnolia-form-group, #restoreProgressModal .magnolia-form-group { margin-bottom: 1rem; }
+        #demoRequestForm label, #restoreProgressModal label { color: #334155; }
+        #demoRequestForm .magnolia-btn-submit { width: 100%; margin-top: 0.5rem; }
+
+        /* Exit Intent Popup */
+        .magnolia-exit-popup { display: none; position: fixed; inset: 0; background-color: rgba(15, 23, 42, 0.8); z-index: 1050; justify-content: center; align-items: center; padding: 1rem; opacity: 0; transition: opacity 0.4s ease; }
+        .magnolia-exit-popup.show { opacity: 1; }
+        .magnolia-exit-popup-content { background-color: white; padding: 1.5rem; border-radius: 12px; max-width: 480px; width: 100%; position: relative; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); transform: translateY(-20px); transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+        .magnolia-exit-popup.show .magnolia-exit-popup-content { transform: translateY(0); }
+        .magnolia-exit-close { position: absolute; top: 0.5rem; right: 0.5rem; font-size: 1.5rem; color: #94a3b8; cursor: pointer; transition: all 0.2s; line-height: 1; padding: 0.5rem; background: none; border: none; }
+        .magnolia-exit-close:hover { color: #334155; transform: scale(1.1); }
+        .magnolia-exit-header { text-align: center; margin-bottom: 1.25rem; }
+        .magnolia-exit-header h2 { margin-bottom: 0.5rem; color: #1e293b; font-size: 1.25rem; font-weight: 600; }
+        .magnolia-exit-header p { color: #475569; font-size: 0.9375rem; line-height: 1.6; }
+        .magnolia-exit-form { margin-bottom: 1rem; }
+        .magnolia-exit-form .magnolia-form-group { margin-bottom: 1rem; }
+        .magnolia-exit-form label { color: #334155; }
+        .magnolia-exit-form button#exitSubmit { width: 100%; background-color: #6366f1; color: white; margin-top: 0.5rem; padding: 0.75rem; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .magnolia-exit-form button#exitSubmit:hover:not(:disabled) { background-color: #4f46e5; }
+        .magnolia-exit-footer { text-align: center; font-size: 0.8125rem; color: #94a3b8; margin-top: 1rem; }
+
+        /* Notifications */
+        #magnolia-notification-area, #magnoliaFomoContainer {
+            position: fixed; z-index: 1100; display: flex; flex-direction: column; gap: 0.75rem;
+            width: calc(100% - 20px); /* Adjust width for mobile */
+            max-width: 380px; /* Max width on larger screens */
+            left: 10px; /* Position from left for mobile */
+            bottom: 10px;
+        }
+        #magnolia-notification-area { align-items: flex-start; /* Default for single column */ } /* Save confirm usually on right, but for mobile could be left too */
+        #magnoliaFomoContainer { align-items: flex-start; }
+
+
+        .magnolia-save-confirm, .magnolia-fomo-notification {
+            background-color: white; padding: 1rem; border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07); display: flex; align-items: center;
+            width: 100%; /* Full width within container */
+            opacity: 0; transition: all 0.4s ease; position: relative;
+        }
+        .magnolia-save-confirm { transform: translateX(20px); }
+        .magnolia-save-confirm.show { transform: translateX(0); opacity: 1; }
+        .magnolia-fomo-notification { transform: translateX(-20px); }
+        .magnolia-fomo-notification.show { transform: translateX(0); opacity: 1; }
+
+        .magnolia-save-icon { font-size: 1.25rem; margin-right: 0.75rem; color: #22c55e; flex-shrink: 0; }
+        .magnolia-save-message p { margin-bottom: 0.25rem; font-weight: 500; color: #334155; font-size: 0.875rem; }
+        .magnolia-fomo-content { display: flex; align-items: center; flex-grow: 1; }
+        .magnolia-fomo-icon { font-size: 1.25rem; margin-right: 0.75rem; color: #3b82f6; background-color: #eff6ff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .magnolia-fomo-message { font-size: 0.8125rem; color: #334155; line-height: 1.4; }
+        .magnolia-fomo-message strong { color: #1e293b; font-weight: 600; }
+        .magnolia-fomo-time { font-size: 0.75rem; color: #94a3b8; display: block; margin-top: 3px; }
+        .magnolia-fomo-close { margin-left: 0.75rem; color: #94a3b8; cursor: pointer; font-size: 1.25rem; font-weight: bold; padding: 0.25rem; transition: color 0.2s; align-self: flex-start; background: none; border: none; }
+        .magnolia-fomo-close:hover { color: #334155; }
+
+        .terms-link { color: #6366f1; text-decoration: underline; font-weight: 500; }
+        .terms-link:hover { color: #4f46e5; }
+
+        .magnolia-success-message { text-align: center; padding: 1.5rem 0; }
+        .magnolia-success-message .magnolia-confirmation-icon { font-size: 3rem; color: #22c55e; margin-bottom: 1rem; }
+        .magnolia-success-message h3 { margin-bottom: 0.75rem; color: #1e293b; font-size: 1.25rem; font-weight: 600; }
+        .magnolia-success-message p { color: #475569; font-size: 0.9375rem; line-height: 1.6; max-width: 90%; margin: 0 auto; }
+
+        /* Desktop and larger screen adjustments (min-width: 769px) */
+        @media (min-width: 769px) {
+            .magnolia-client-profile-container {
+                padding: 40px; /* Restore larger padding */
+                margin: 40px auto; /* Restore larger margin */
+            }
+            .magnolia-card-header {
+                font-size: 1.5rem; /* 24px */
+                padding: 1.25rem 1.75rem; /* 20px 28px */
+            }
+            .magnolia-card-body {
+                padding: 2rem; /* Restore larger padding */
+            }
+            .magnolia-value-banner {
+                flex-direction: row; /* Horizontal layout */
+                padding: 1.25rem;
+                margin-bottom: 2rem;
+            }
+            .magnolia-value-icon {
+                font-size: 1.75rem;
+                margin-right: 1rem;
+                margin-bottom: 0;
+            }
+            .magnolia-value-content h3 { font-size: 1.25rem; }
+            .magnolia-value-content p { font-size: 0.9375rem; }
+
+            .magnolia-progress-container { margin-bottom: 2.25rem; }
+            .magnolia-progress-bar { margin-bottom: 0.75rem; }
+            .magnolia-progress-bar::before { left: 18px; right: 18px; height: 4px; }
+            .magnolia-progress-step { width: 36px; height: 36px; font-size: 0.875rem; border-width: 3px; }
+            .magnolia-progress-step.active { box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25); }
+            .magnolia-progress-labels { padding: 0 5px; }
+            .magnolia-progress-labels span { font-size: 0.8125rem; line-height: 1.3; }
+
+            .magnolia-quick-options {
+                flex-direction: row; /* Horizontal layout */
+                align-items: center;
+                text-align: left;
+                padding: 1rem 1.25rem;
+                margin-bottom: 2rem;
+            }
+            .magnolia-quick-option-text p { font-size: 0.9375rem; margin-bottom: 0; }
+            .magnolia-btn-demo { width: auto; max-width: none; padding: 0.625rem 1.125rem; }
+
+            .magnolia-trust-indicators { flex-direction: row; gap: 1rem; margin-bottom: 2rem; }
+            .magnolia-security-badge { min-width: 220px; width: auto; flex: 1 1 auto; justify-content: flex-start; background-color: #f8fafc; border: 1px solid #e2e8f0; color: #475569;}
+            .magnolia-clients-count { min-width: 220px; width: auto; flex: 1 1 auto; justify-content: flex-start; background-color: #eef2ff; border: 1px solid #c7d2fe; color: #4338ca;}
+            .magnolia-clients-count strong { color: #3730a3; }
+            .magnolia-clients-count .magnolia-counter-icon { color: #4f46e5; }
+
+
+            .magnolia-social-proof { margin-bottom: 2.25rem; }
+            .magnolia-testimonial-slider { padding: 1.75rem; margin-bottom: 1.5rem; }
+            .magnolia-testimonial-content { padding: 1.75rem; }
+            .magnolia-testimonial-quote { font-size: 1rem; margin-bottom: 1.5rem; }
+            .magnolia-testimonial-quote::before { left: -1rem; top: -0.5rem; font-size: 3rem; }
+            .magnolia-author-avatar { width: 48px; height: 48px; font-size: 1rem; margin-right: 0.875rem; }
+            .magnolia-author-name { font-size: 0.9375rem; }
+            .magnolia-author-role { font-size: 0.8125rem; }
+            .magnolia-dot { width: 12px; height: 12px; margin: 0 6px; }
+
+            .magnolia-completion-indicator { margin-bottom: 2.25rem; }
+            .magnolia-progress-outer { height: 10px; border-radius: 5px; }
+            .magnolia-progress-inner { border-radius: 5px; }
+
+            .magnolia-form-section { padding-top: 1.5rem; margin-top: 1.5rem; }
+            .magnolia-form-section h3 { margin-bottom: 1.75rem; font-size: 1.375rem; }
+            .magnolia-form-group { margin-bottom: 1.5rem; }
+            .magnolia-form-row { flex-direction: row; gap: 1.5rem; margin-bottom: 1.5rem; }
+            .magnolia-form-row .magnolia-form-group { margin-bottom: 0; min-width: 200px; }
+
+
+            .magnolia-lead-magnet { margin: 2rem 0; }
+            .magnolia-lead-magnet-banner { padding: 1.5rem; }
+            .magnolia-lead-magnet-icon { font-size: 1.875rem; margin-right: 1.25rem; }
+            .magnolia-lead-magnet-info h4 { font-size: 1.125rem; margin-bottom: 0.625rem; }
+            .magnolia-lead-magnet-info p { font-size: 0.9375rem; margin-bottom: 1rem; }
+
+            .magnolia-form-note { padding: 1rem 1.25rem; margin: 1.5rem 0; }
+
+            .magnolia-buttons { flex-direction: row; justify-content: space-between; gap: 0.75rem; margin-top: 2rem; padding-top: 1.5rem; }
+            .magnolia-btn-save, .magnolia-btn-prev, .magnolia-btn-next, .magnolia-btn-submit, .magnolia-btn-continue, .magnolia-modal-btn {
+                width: auto; /* Auto width for desktop */
+                 padding: 0.75rem 1.5rem;
+            }
+             .magnolia-btn-next, .magnolia-btn-submit, .magnolia-modal-btn.primary {
+                order: 0; /* Reset order for desktop */
+            }
+
+            .magnolia-modal-actions { flex-direction: row; }
+            .magnolia-modal-actions .magnolia-modal-btn { width: auto; }
+
+
+            .magnolia-final-cta { flex-direction: row; text-align: left; padding: 1.5rem; margin: 2rem 0; }
+            .magnolia-cta-icon { font-size: 2rem; margin-right: 1.25rem; margin-bottom: 0; }
+            .magnolia-cta-content h4 { font-size: 1.25rem; }
+            .magnolia-cta-content p { font-size: 0.9375rem; }
+
+            .magnolia-confirmation { padding: 2.5rem 1.5rem; }
+            .magnolia-confirmation-icon { font-size: 4rem; margin-bottom: 1.5rem; }
+            .magnolia-confirmation h2 { font-size: 1.75rem; margin-bottom: 1rem; }
+            .magnolia-confirmation p { font-size: 1rem; margin-bottom: 1.5rem; }
+            .magnolia-what-next { padding: 1.5rem 1.75rem; margin: 2rem 0; }
+            .magnolia-what-next h3 { font-size: 1.125rem; margin-bottom: 1.25rem; }
+            .magnolia-what-next li { font-size: 0.9375rem; margin-bottom: 0.75rem; }
+            .magnolia-social-share { margin: 2rem 0; padding-top: 1.5rem; }
+            .magnolia-social-share p { font-size: 0.9375rem; margin-bottom: 1rem; }
+            .magnolia-social-share-buttons { flex-direction: row; gap: 1rem; margin-top: 1rem; }
+            .magnolia-share-btn { width: auto; padding: 0.625rem 1.25rem; }
+            .magnolia-confirmation a.magnolia-btn-next { margin-top: 1.5rem; width: auto; }
+
+            .magnolia-modal-content { padding: 2rem; }
+            .magnolia-modal-close { top: 0.75rem; right: 0.75rem; }
+            .magnolia-modal h3 { font-size: 1.375rem; }
+            .magnolia-modal p { font-size: 0.9375rem; margin-bottom: 1.5rem; }
+            #demoRequestForm .magnolia-form-group, #restoreProgressModal .magnolia-form-group { margin-bottom: 1.25rem; }
+
+            .magnolia-exit-popup-content { padding: 2rem; }
+            .magnolia-exit-close { top: 0.75rem; right: 0.75rem; }
+            .magnolia-exit-header { margin-bottom: 1.5rem; }
+            .magnolia-exit-header h2 { font-size: 1.5rem; }
+            .magnolia-exit-header p { font-size: 1rem; }
+            .magnolia-exit-form { margin-bottom: 1.25rem; }
+            .magnolia-exit-form .magnolia-form-group { margin-bottom: 1rem; }
+            .magnolia-exit-footer { margin-top: 1.25rem; }
+
+            #magnolia-notification-area {
+                right: 1.25rem; /* Position to right on desktop */
+                left: auto;
+                align-items: flex-end; /* Align to right */
+
+            }
+            #magnoliaFomoContainer {
+                left: 1.25rem; /* Position to left on desktop */
+                right: auto;
+                 align-items: flex-start;
+            }
+            .magnolia-save-confirm, .magnolia-fomo-notification {
+                width: fit-content; /* Auto width on desktop */
+                max-width: 380px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="magnolia-client-profile-container">
+    <div class="magnolia-card">
+        <div class="magnolia-card-header">Create Your Client Profile</div>
+        <div class="magnolia-card-body">
+            <div class="magnolia-value-banner">
+                <div class="magnolia-value-icon">🚀</div>
+                <div class="magnolia-value-content">
+                    <h3>Accelerate Your AI Journey</h3>
+                    <p>Complete this profile to receive a personalized AI implementation roadmap for your business needs. Average time to complete: 4-5 minutes.</p>
+                </div>
+            </div>
+
+            <div class="magnolia-progress-container">
+                <div class="magnolia-progress-bar">
+                    <div class="magnolia-progress-step active" id="magnolia-step1">1</div>
+                    <div class="magnolia-progress-step" id="magnolia-step2">2</div>
+                    <div class="magnolia-progress-step" id="magnolia-step3">3</div>
+                    <div class="magnolia-progress-step" id="magnolia-step4">4</div>
+                    <div class="magnolia-progress-step" id="magnolia-step5">5</div>
+                </div>
+                <div class="magnolia-progress-labels">
+                    <span data-step="1">Basic Info</span>
+                    <span data-step="2">AI Requirements</span>
+                    <span data-step="3">Technical</span>
+                    <span data-step="4">Project</span>
+                    <span data-step="5">Communication</span>
+                </div>
+            </div>
+
+            <div class="magnolia-quick-options">
+                <div class="magnolia-quick-option-text">
+                    <p>Not ready to complete the full profile?</p>
+                </div>
+                <button type="button" class="magnolia-btn-demo" id="scheduleDemoBtn">Schedule a 15-Min Demo</button>
+            </div>
+
+            <div class="magnolia-trust-indicators">
+                <div class="magnolia-security-badge">
+                    <div class="magnolia-security-icon">🔒</div>
+                    <span>Your information is secure & confidential</span>
+                </div>
+                <div class="magnolia-clients-count">
+                    <div class="magnolia-counter-icon">👥</div>
+                    <span>Trusted by <strong>500+</strong> businesses</span>
+                </div>
+            </div>
+
+            <div class="magnolia-social-proof">
+                <div class="magnolia-testimonial-slider">
+                    <!-- Testimonial Slide 1 -->
+                    <div class="magnolia-testimonial-slide">
+                        <div class="magnolia-testimonial-content">
+                            <div class="magnolia-testimonial-quote">"Magnolia AI Solutions helped us streamline our operations by 45% in just three months. Their client onboarding process was smooth and professional."</div>
+                            <div class="magnolia-testimonial-author">
+                                <div class="magnolia-author-avatar">JD</div>
+                                <div class="magnolia-author-info">
+                                    <div class="magnolia-author-name">Jason Dawes</div>
+                                    <div class="magnolia-author-role">CTO, TechVision Inc.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial Slide 2 -->
+                    <div class="magnolia-testimonial-slide">
+                        <div class="magnolia-testimonial-content">
+                            <div class="magnolia-testimonial-quote">"Working with Magnolia AI Solutions saved us over $200K in our first year. Their team understood our unique challenges from day one."</div>
+                            <div class="magnolia-testimonial-author">
+                                <div class="magnolia-author-avatar">SM</div>
+                                <div class="magnolia-author-info">
+                                    <div class="magnolia-author-name">Sarah Miller</div>
+                                    <div class="magnolia-author-role">COO, Precision Healthcare</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial Slide 3 -->
+                    <div class="magnolia-testimonial-slide">
+                        <div class="magnolia-testimonial-content">
+                            <div class="magnolia-testimonial-quote">"The client profile process helped Magnolia understand our goals perfectly. Within weeks we had a custom AI solution that transformed our customer experience."</div>
+                            <div class="magnolia-testimonial-author">
+                                <div class="magnolia-author-avatar">RL</div>
+                                <div class="magnolia-author-info">
+                                    <div class="magnolia-author-name">Robert Lee</div>
+                                    <div class="magnolia-author-role">CEO, FlexRetail</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="magnolia-testimonial-dots">
+                    <span class="magnolia-dot active"></span>
+                    <span class="magnolia-dot"></span>
+                    <span class="magnolia-dot"></span>
+                </div>
+            </div>
+
+            <div class="magnolia-completion-indicator">
+                <div class="magnolia-progress-wrapper">
+                    <div class="magnolia-progress-text">Form Completion:</div>
+                    <div class="magnolia-progress-percentage">
+                        <span id="completion-percentage">0</span>%
+                    </div>
+                </div>
+                <div class="magnolia-progress-outer">
+                    <div class="magnolia-progress-inner" id="completion-bar" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <form id="magnoliaClientProfileForm">
+                <!-- Section 1: Basic Information -->
+                <div class="magnolia-form-section active" id="magnolia-section1">
+                    <h3>Basic Information</h3>
+                    <div class="magnolia-minimized-fields">
+                        <div class="magnolia-form-group">
+                            <label for="email" class="required">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="your@email.com">
+                        </div>
+                        <div class="magnolia-form-row">
+                            <div class="magnolia-form-group">
+                                <label for="contactName" class="required">Full Name</label>
+                                <input type="text" id="contactName" name="contactName" required placeholder="Your Name">
+                            </div>
+                            <div class="magnolia-form-group">
+                                <label for="phone" class="required">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="(123) 456-7890">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="magnolia-remaining-fields">
+                        <div class="magnolia-form-group">
+                            <label for="companyName" class="required">Company Name</label>
+                            <input type="text" id="companyName" name="companyName" required placeholder="Company Name">
+                        </div>
+                        <div class="magnolia-form-row">
+                            <div class="magnolia-form-group">
+                                <label for="jobTitle" class="required">Job Title</label>
+                                <input type="text" id="jobTitle" name="jobTitle" required placeholder="Your Position">
+                            </div>
+                            <div class="magnolia-form-group">
+                                <label for="website">Company Website</label>
+                                <input type="url" id="website" name="website" placeholder="https://www.example.com">
+                            </div>
+                        </div>
+                        <div class="magnolia-form-row">
+                            <div class="magnolia-form-group">
+                                <label for="industry" class="required">Industry/Sector</label>
+                                <select id="industry" name="industry" required>
+                                    <option value="">Select an industry</option>
+                                    <option value="technology">Technology</option>
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="finance">Finance & Banking</option>
+                                    <option value="retail">Retail & E-commerce</option>
+                                    <option value="manufacturing">Manufacturing</option>
+                                    <option value="education">Education</option>
+                                    <option value="government">Government</option>
+                                    <option value="transportation">Transportation & Logistics</option>
+                                    <option value="energy">Energy & Utilities</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="magnolia-form-group">
+                                <label for="companySize" class="required">Company Size</label>
+                                <select id="companySize" name="companySize" required>
+                                    <option value="">Select company size</option>
+                                    <option value="1-10">1-10 employees</option>
+                                    <option value="11-50">11-50 employees</option>
+                                    <option value="51-200">51-200 employees</option>
+                                    <option value="201-1000">201-1000 employees</option>
+                                    <option value="1000+">1000+ employees</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="magnolia-lead-magnet">
+                        <div class="magnolia-lead-magnet-banner">
+                            <div class="magnolia-lead-magnet-icon">📊</div>
+                            <div class="magnolia-lead-magnet-info">
+                                <h4>Free AI Readiness Assessment</h4>
+                                <p>Get our exclusive guide on evaluating if your business is ready for AI implementation. We'll email it to you immediately when you complete this step!</p>
+                                <div class="magnolia-checkbox-item">
+                                    <input type="checkbox" id="optInLead" name="optInLead" checked>
+                                    <label for="optInLead">Yes, I'd like to receive the free AI Readiness Assessment</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="magnolia-form-note">
+                        <p><strong>Why we need this information:</strong> These details help us understand your business context and prepare a personalized AI implementation strategy.</p>
+                    </div>
+                    <div class="magnolia-buttons">
+                        <button type="button" class="magnolia-btn-save" id="saveProgress1">Save Progress</button>
+                        <button type="button" class="magnolia-btn-next" id="nextStep1">Next</button>
+                    </div>
+                </div>
+
+                <!-- Section 2: AI Requirements -->
+                <div class="magnolia-form-section" id="magnolia-section2">
+                    <h3>AI Requirements</h3>
+                    <div class="magnolia-form-group">
+                        <label class="required">What are your primary objectives for implementing AI? (Select all that apply)</label>
+                        <div class="magnolia-checkbox-group">
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="objective1" name="aiObjectives" value="automation">
+                                <label for="objective1">Automate repetitive tasks</label>
+                            </div>
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="objective2" name="aiObjectives" value="insights">
+                                <label for="objective2">Generate business insights</label>
+                            </div>
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="objective3" name="aiObjectives" value="customer">
+                                <label for="objective3">Enhance customer experience</label>
+                            </div>
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="objective4" name="aiObjectives" value="predictions">
+                                <label for="objective4">Make predictions or forecasts</label>
+                            </div>
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="objective5" name="aiObjectives" value="decisions">
+                                <label for="objective5">Support decision making</label>
+                            </div>
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="objective6" name="aiObjectives" value="other">
+                                <label for="objective6">Other</label>
+                                <input type="text" id="objectiveOther" name="objectiveOther" class="conditional-input" placeholder="Please specify">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="magnolia-form-row">
+                        <div class="magnolia-form-group">
+                            <label for="aiTimeline" class="required">Implementation Timeline</label>
+                            <select id="aiTimeline" name="aiTimeline" required>
+                                <option value="">Select timeline</option>
+                                <option value="immediate">Immediate (Within 1 month)</option>
+                                <option value="short">Short-term (1-3 months)</option>
+                                <option value="medium">Medium-term (3-6 months)</option>
+                                <option value="long">Long-term (6-12 months)</option>
+                                <option value="planning">Just planning at this stage</option>
+                            </select>
+                        </div>
+                        <div class="magnolia-form-group">
+                            <label for="aiExperience" class="required">Previous AI Experience</label>
+                            <select id="aiExperience" name="aiExperience" required>
+                                <option value="">Select experience level</option>
+                                <option value="none">No previous experience</option>
+                                <option value="basic">Basic understanding</option>
+                                <option value="some">Some experience with AI projects</option>
+                                <option value="significant">Significant experience</option>
+                                <option value="expert">Expert with multiple AI implementations</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="magnolia-form-group">
+                        <label for="aiSpecifics">Please describe your specific AI needs or challenges</label>
+                        <textarea id="aiSpecifics" name="aiSpecifics" rows="4" placeholder="Tell us about your specific requirements or problems you're trying to solve with AI"></textarea>
+                    </div>
+                    <div class="magnolia-buttons">
+                        <button type="button" class="magnolia-btn-prev" id="prevStep2">Previous</button>
+                        <button type="button" class="magnolia-btn-save" id="saveProgress2">Save Progress</button>
+                        <button type="button" class="magnolia-btn-next" id="nextStep2">Next</button>
+                    </div>
+                </div>
+
+                <!-- Section 3: Technical Information -->
+                <div class="magnolia-form-section" id="magnolia-section3">
+                    <h3>Technical Information</h3>
+                    <div class="magnolia-form-group">
+                        <label for="dataAvailability" class="required">Data Availability</label>
+                        <select id="dataAvailability" name="dataAvailability" required>
+                            <option value="">Select data availability</option>
+                            <option value="extensive">Extensive data available</option>
+                            <option value="some">Some data available</option>
+                            <option value="limited">Limited data available</option>
+                            <option value="none">No relevant data available</option>
+                            <option value="unsure">Unsure</option>
+                        </select>
+                    </div>
+                    <div class="magnolia-form-group">
+                        <label>Current Systems (Select all that apply)</label>
+                        <div class="magnolia-checkbox-group">
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="system1" name="currentSystems" value="crm">
+                                <label for="system1">CRM (e.g., Salesforce, HubSpot)</label>
+                            </div>
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="system2" name="currentSystems" value="erp">
+                                <label for="system2">ERP System</label>
+                            </div>
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="system3" name="currentSystems" value="ecommerce">
+                                <label for="system3">E-commerce Platform</label>
+                            </div>
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="system4" name="currentSystems" value="analytics">
+                                <label for="system4">Analytics Platform</label>
+                            </div>
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="system5" name="currentSystems" value="cloud">
+                                <label for="system5">Cloud Services</label>
+                            </div>
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="system6" name="currentSystems" value="other">
+                                <label for="system6">Other</label>
+                                <input type="text" id="systemOther" name="systemOther" class="conditional-input" placeholder="Please specify">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="magnolia-form-group">
+                        <label for="integrationNeeds">Integration Requirements</label>
+                        <textarea id="integrationNeeds" name="integrationNeeds" rows="3" placeholder="Describe any systems that need to be integrated with your AI solution"></textarea>
+                    </div>
+                    <div class="magnolia-form-group">
+                        <label for="techStack">Current Technology Stack</label>
+                        <textarea id="techStack" name="techStack" rows="3" placeholder="List key technologies, languages, frameworks, databases, etc."></textarea>
+                    </div>
+                    <div class="magnolia-buttons">
+                        <button type="button" class="magnolia-btn-prev" id="prevStep3">Previous</button>
+                        <button type="button" class="magnolia-btn-save" id="saveProgress3">Save Progress</button>
+                        <button type="button" class="magnolia-btn-next" id="nextStep3">Next</button>
+                    </div>
+                </div>
+
+                <!-- Section 4: Project Information -->
+                <div class="magnolia-form-section" id="magnolia-section4">
+                    <h3>Project Information</h3>
+                    <div class="magnolia-form-row">
+                        <div class="magnolia-form-group">
+                            <label for="budget" class="required">Estimated Budget Range</label>
+                            <select id="budget" name="budget" required>
+                                <option value="">Select budget range</option>
+                                <option value="under10k">Under $10,000</option>
+                                <option value="10k-25k">$10,000 - $25,000</option>
+                                <option value="25k-50k">$25,000 - $50,000</option>
+                                <option value="50k-100k">$50,000 - $100,000</option>
+                                <option value="100k-250k">$100,000 - $250,000</option>
+                                <option value="over250k">Over $250,000</option>
+                                <option value="undetermined">Undetermined</option>
+                            </select>
+                        </div>
+                        <div class="magnolia-form-group">
+                            <label for="decisionProcess" class="required">Decision-Making Role</label>
+                            <select id="decisionProcess" name="decisionProcess" required>
+                                <option value="">Select role</option>
+                                <option value="sole">Sole decision maker</option>
+                                <option value="key">Key influencer</option>
+                                <option value="part">Part of decision-making team</option>
+                                <option value="research">Researching options</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="magnolia-form-group">
+                        <label for="otherDeciders">Other Key Decision Makers</label>
+                        <textarea id="otherDeciders" name="otherDeciders" rows="2" placeholder="Names, titles, and roles of other stakeholders (if applicable)"></textarea>
+                    </div>
+                    <div class="magnolia-form-group">
+                        <label for="successMetrics">How will you measure success?</label>
+                        <textarea id="successMetrics" name="successMetrics" rows="3" placeholder="KPIs, metrics, or outcomes you expect from this AI implementation"></textarea>
+                    </div>
+                    <div class="magnolia-form-group">
+                        <label for="challenges">Anticipated Challenges</label>
+                        <textarea id="challenges" name="challenges" rows="3" placeholder="Any potential hurdles you foresee with implementing AI"></textarea>
+                    </div>
+                    <div class="magnolia-buttons">
+                        <button type="button" class="magnolia-btn-prev" id="prevStep4">Previous</button>
+                        <button type="button" class="magnolia-btn-save" id="saveProgress4">Save Progress</button>
+                        <button type="button" class="magnolia-btn-next" id="nextStep4">Next</button>
+                    </div>
+                </div>
+
+                <!-- Section 5: Communication & Next Steps -->
+                <div class="magnolia-form-section" id="magnolia-section5">
+                    <h3>Communication & Next Steps</h3>
+                    <div class="magnolia-form-row">
+                        <div class="magnolia-form-group">
+                            <label for="contactPreference" class="required">Preferred Contact Method</label>
+                            <select id="contactPreference" name="contactPreference" required>
+                                <option value="">Select preferred method</option>
+                                <option value="email">Email</option>
+                                <option value="phone">Phone</option>
+                                <option value="video">Video Call</option>
+                            </select>
+                        </div>
+                        <div class="magnolia-form-group">
+                            <label for="urgency">Project Urgency</label>
+                            <select id="urgency" name="urgency">
+                                <option value="">Select urgency level</option>
+                                <option value="critical">Critical - Need immediate attention</option>
+                                <option value="high">High - Important but not urgent</option>
+                                <option value="medium">Medium - Planning phase</option>
+                                <option value="low">Low - Just exploring options</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="magnolia-form-group">
+                        <label for="availability">General Availability for Meetings</label>
+                        <textarea id="availability" name="availability" rows="2" placeholder="e.g., Weekday mornings, Tuesday/Thursday afternoons"></textarea>
+                    </div>
+                    <div class="magnolia-form-group">
+                        <label>Next Steps You're Interested In (Optional)</label>
+                        <div class="magnolia-checkbox-group">
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="step1" name="nextSteps" value="consult">
+                                <label for="step1">Initial Consultation Call</label>
+                            </div>
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="step2" name="nextSteps" value="demo">
+                                <label for="step2">Product/Platform Demo</label>
+                            </div>
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="step3" name="nextSteps" value="proposal">
+                                <label for="step3">Custom Solution Proposal</label>
+                            </div>
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="step4" name="nextSteps" value="assessment">
+                                <label for="step4">Detailed AI Readiness Assessment</label>
+                            </div>
+                            <div class="magnolia-checkbox-item">
+                                <input type="checkbox" id="step5" name="nextSteps" value="workshop">
+                                <label for="step5">Strategy Workshop</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="magnolia-form-group">
+                        <label for="additionalInfo">Additional Information</label>
+                        <textarea id="additionalInfo" name="additionalInfo" rows="3" placeholder="Anything else you'd like to share about your needs or project?"></textarea>
+                    </div>
+                    <div class="magnolia-form-group">
+                        <div class="magnolia-checkbox-item">
+                            <input type="checkbox" id="newsletter" name="newsletter" checked>
+                            <label for="newsletter">Subscribe to our AI insights newsletter</label>
+                        </div>
+                    </div>
+                    <div class="magnolia-form-group">
+                        <div class="magnolia-checkbox-item">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms" class="required">I agree to the <a href="#" class="terms-link" target="_blank" rel="noopener noreferrer">terms and privacy policy</a></label>
+                        </div>
+                    </div>
+                    <div class="magnolia-final-cta">
+                        <div class="magnolia-cta-icon">🎯</div>
+                        <div class="magnolia-cta-content">
+                            <h4>You're Almost There!</h4>
+                            <p>Submit your profile to receive your <strong>personalized AI implementation plan</strong> and schedule your free consultation with our AI experts.</p>
+                        </div>
+                    </div>
+                    <div class="magnolia-buttons">
+                        <button type="button" class="magnolia-btn-prev" id="prevStep5">Previous</button>
+                        <button type="button" class="magnolia-btn-save" id="saveProgress5">Save Progress</button>
+                        <button type="submit" class="magnolia-btn-submit" id="submitForm">Submit Profile</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="magnolia-confirmation hidden" id="magnolia-confirmationSection">
+                <div class="magnolia-confirmation-icon">✅</div>
+                <h2>Profile Created Successfully!</h2>
+                <p class="magnolia-confirmation-message">Thank you for creating your client profile with Magnolia AI Solutions. Our team will review your information and contact you shortly to discuss your AI project needs.</p>
+                <p>A confirmation email has been sent to your provided email address with a summary of your information.</p>
+                <div class="magnolia-what-next">
+                    <h3>What Happens Next?</h3>
+                    <ol>
+                        <li><strong>Expert Review:</strong> Our team will analyze your requirements (typically within 1 business day).</li>
+                        <li><strong>Initial Call:</strong> We'll reach out via your preferred method to schedule a discovery call.</li>
+                        <li><strong>Custom Plan:</strong> Based on our discussion, you'll receive a tailored AI implementation strategy.</li>
+                    </ol>
+                </div>
+                <div class="magnolia-social-share">
+                    <p>Know someone who could benefit from AI solutions?</p>
+                    <div class="magnolia-share-buttons">
+                        <button type="button" class="magnolia-share-btn" id="shareLinkedIn">Share on LinkedIn</button>
+                        <button type="button" class="magnolia-share-btn" id="shareEmail">Share via Email</button>
+                    </div>
+                </div>
+                <a href="#" class="magnolia-btn-next magnolia-btn-continue">Go to Dashboard</a> <!-- Reused btn-next for styling -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Demo Modal -->
+<div id="demoModal" class="magnolia-modal">
+    <div class="magnolia-modal-content">
+        <button type="button" class="magnolia-modal-close" aria-label="Close modal">&times;</button>
+        <h3>Schedule Your Free AI Demo</h3>
+        <p>Just provide your contact details, and we'll reach out to schedule your personalized 15-minute demo.</p>
+        <form id="demoRequestForm">
+            <div class="magnolia-form-group">
+                <label for="demoName" class="required">Your Name</label>
+                <input type="text" id="demoName" name="demoName" required placeholder="Your Name">
+            </div>
+            <div class="magnolia-form-group">
+                <label for="demoEmail" class="required">Email Address</label>
+                <input type="email" id="demoEmail" name="demoEmail" required placeholder="your@email.com">
+            </div>
+            <div class="magnolia-form-group">
+                <label for="demoPhone" class="required">Phone Number</label>
+                <input type="tel" id="demoPhone" name="demoPhone" required placeholder="(123) 456-7890">
+            </div>
+            <div class="magnolia-form-group">
+                <label for="demoCompany">Company (Optional)</label>
+                <input type="text" id="demoCompany" name="demoCompany" placeholder="Your Company">
+            </div>
+            <div class="magnolia-form-group">
+                <label for="demoInterest">What aspects of AI are you most interested in? (Optional)</label>
+                <textarea id="demoInterest" name="demoInterest" rows="3" placeholder="e.g., Automation, Customer Service AI, Data Analysis"></textarea>
+            </div>
+            <button type="submit" class="magnolia-btn-submit" id="submitDemoRequest">Request Demo</button>
+        </form>
+    </div>
+</div>
+
+<!-- Exit Intent Popup -->
+<div id="exitPopup" class="magnolia-exit-popup">
+    <div class="magnolia-exit-popup-content">
+        <button type="button" class="magnolia-exit-close" aria-label="Close popup">&times;</button>
+        <div class="magnolia-exit-header">
+            <h2>Wait! Don't Miss Out</h2>
+            <p>Get our free guide: "5 Ways AI Is Transforming Business in 2025"</p>
+        </div>
+        <div class="magnolia-exit-form">
+            <form id="exitIntentForm">
+                <div class="magnolia-form-group">
+                    <label for="exitEmail" class="required">Email Address</label>
+                    <input type="email" id="exitEmail" name="exitEmail" placeholder="Your email address" required>
+                </div>
+                <div class="magnolia-form-group">
+                    <label for="exitName">Name (Optional)</label>
+                    <input type="text" id="exitName" name="exitName" placeholder="Your name">
+                </div>
+                <button type="button" id="exitSubmit" class="magnolia-btn-next">Send Me the Guide</button> <!-- Reused btn-next for styling -->
+            </form>
+        </div>
+        <div class="magnolia-exit-footer">
+            <p>We respect your privacy and will never share your information.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Restore Progress Modal -->
+<div id="restoreProgressModal" class="magnolia-modal">
+    <div class="magnolia-modal-content">
+        <button type="button" class="magnolia-modal-close" aria-label="Close modal">&times;</button>
+        <h3>Saved Progress Found</h3>
+        <p>We found saved progress from your last visit. Would you like to continue where you left off?</p>
+        <div class="magnolia-modal-actions">
+            <button type="button" class="magnolia-modal-btn secondary" id="restoreProgressNo">No, Start Over</button>
+            <button type="button" class="magnolia-modal-btn primary" id="restoreProgressYes">Yes, Restore</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="magnoliaFomoContainer"></div>
+<div id="magnolia-notification-area"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const formContainer = document.querySelector('.magnolia-client-profile-container');
+    if (!formContainer) {
+        console.warn('Magnolia form container not found. Ensure ".magnolia-client-profile-container" exists.');
+        return;
+    }
+
+    try {
+        initFormNavigation();
+        initSaveProgress();
+        initDemoModal();
+        initExitIntent();
+        initConditionalInputs();
+        initFormValidation(); // General input validation listeners
+        initSlider();
+        initRestoreProgressModal(); // Initialize the new modal
+        checkForSavedProgress(); // This will now use the custom modal
+        initFomoNotifications();
+        updateProgressIndicators(1); // Initialize progress on load
+    } catch (error) {
+        console.error('Error initializing Magnolia form:', error);
+    }
+});
+
+// UPDATED: Google Sheets URL
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyxoJaMacs4lnVklKFvxx72Cx7vQq0tEoa1xzAJJd_PAjp01Dgeqaf2-VM4VPba7UzBUw/exec';
+// Note: Your Google Apps Script doPost(e) function should be set up to parse a JSON payload from e.postData.contents.
+
+function initFormNavigation() {
+    const form = document.getElementById('magnoliaClientProfileForm');
+    if (!form) {
+        console.warn('Form #magnoliaClientProfileForm not found.');
+        return;
+    }
+
+    // Next buttons
+    form.querySelectorAll('.magnolia-btn-next').forEach(button => {
+        button.addEventListener('click', function() {
+            const currentSection = this.closest('.magnolia-form-section');
+            if (!currentSection) return;
+            const currentId = currentSection.id;
+            const currentStep = parseInt(currentId.replace('magnolia-section', ''), 10);
+
+            if (!validateSection(currentId)) {
+                return;
+            }
+
+            const nextStep = currentStep + 1;
+            const nextSection = document.getElementById(`magnolia-section${nextStep}`);
+            if (nextSection) {
+                currentSection.classList.remove('active');
+                nextSection.classList.add('active');
+                updateProgressIndicators(nextStep);
+                window.scrollTo({ top: form.offsetTop - 20, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Previous buttons
+    form.querySelectorAll('.magnolia-btn-prev').forEach(button => {
+        button.addEventListener('click', function() {
+            const currentSection = this.closest('.magnolia-form-section');
+            if (!currentSection) return;
+            const currentId = currentSection.id;
+            const currentStep = parseInt(currentId.replace('magnolia-section', ''), 10);
+            const prevStep = currentStep - 1;
+            const prevSection = document.getElementById(`magnolia-section${prevStep}`);
+
+            if (prevSection) {
+                currentSection.classList.remove('active');
+                prevSection.classList.add('active');
+                updateProgressIndicators(prevStep);
+                window.scrollTo({ top: form.offsetTop - 20, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Submit button
+    const submitButton = document.getElementById('submitForm');
+    if (submitButton) {
+        submitButton.addEventListener('click', function(e) {
+            e.preventDefault(); 
+
+            if (!validateSection('magnolia-section5')) {
+                return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            
+            const formData = collectFormData();
+            
+            submitToGoogleSheets(formData)
+                .then(() => {
+                    showConfirmationScreen();
+                    try {
+                        localStorage.removeItem('magnoliaFormData'); 
+                    } catch (lsError) {
+                        console.warn('Could not remove magnoliaFormData from localStorage:', lsError);
+                    }
+                })
+                .catch(error => {
+                    console.error('Submission error:', error);
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Submit Profile';
+                    displayFormError('Submission failed. Please check your connection and try again.');
+                });
+        });
+    }
+}
+
+function collectFormData() {
+    const form = document.getElementById('magnoliaClientProfileForm');
+    const formData = new FormData(form);
+    const data = {};
+
+    for (let [key, value] of formData.entries()) {
+        if (data[key]) {
+            if (Array.isArray(data[key])) {
+                data[key].push(value);
+            } else {
+                data[key] = [data[key], value];
+            }
+        } else {
+            data[key] = value;
+        }
+    }
+
+    const checkboxGroups = ['aiObjectives', 'currentSystems', 'nextSteps'];
+    checkboxGroups.forEach(groupName => {
+        const checkboxes = form.querySelectorAll(`input[name="${groupName}"]:checked`);
+        data[groupName] = Array.from(checkboxes).map(cb => cb.value);
+        if (!data[groupName].length) {
+             data[groupName] = []; 
+        }
+    });
+    
+    ['optInLead', 'newsletter', 'terms'].forEach(name => {
+        const checkbox = form.querySelector(`input[name="${name}"]`);
+        if (checkbox) {
+            data[name] = checkbox.checked;
+        }
+    });
+
+    data.timestamp = new Date().toISOString();
+    data.source = 'Magnolia AI Lead Form'; 
+
+    return data;
+}
+
+async function submitToGoogleSheets(data) {
+    try {
+        // Using 'no-cors' mode means we won't get a direct response, but the request will be sent.
+        // Ensure your Google Apps Script is configured to handle POST requests with JSON payloads.
+        await fetch(GOOGLE_SHEETS_URL, {
+            method: 'POST',
+            mode: 'no-cors', 
+            headers: {
+                 'Content-Type': 'application/json', // Explicitly set Content-Type for JSON payload
+            },
+            body: JSON.stringify(data) 
+        });
+        // Note: For 'no-cors' requests, the browser doesn't allow access to the response.
+        // Success is assumed if the fetch promise resolves. Robust error handling (e.g., checking
+        // if data actually arrived in Sheets) would require a more complex setup (e.g., Apps Script
+        // returning a specific response type like JSONP, or a backend proxy).
+        // The Google Apps Script's doPost(e) function MUST be set up to parse the JSON from e.postData.contents.
+        // Example Apps Script:
+        // function doPost(e) {
+        //   try {
+        //     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet1"); // Or your target sheet
+        //     var parsedData = JSON.parse(e.postData.contents);
+        //
+        //     // Define the order of headers you expect in your sheet
+        //     var headers = ["timestamp", "source", "email", "contactName", "phone", "companyName", 
+        //                    "jobTitle", "website", "industry", "companySize", "optInLead", 
+        //                    "aiObjectives", "objectiveOther", "aiTimeline", "aiExperience", "aiSpecifics",
+        //                    "dataAvailability", "currentSystems", "systemOther", "integrationNeeds", "techStack",
+        //                    "budget", "decisionProcess", "otherDeciders", "successMetrics", "challenges",
+        //                    "contactPreference", "urgency", "availability", "nextSteps", "additionalInfo", 
+        //                    "newsletter", "terms", "formType", "demoName", "demoEmail", "demoPhone", 
+        //                    "demoCompany", "demoInterest", "exitEmail", "exitName"];
+        //
+        //     // If sheet is empty, add headers
+        //     if (sheet.getLastRow() === 0) {
+        //       sheet.appendRow(headers);
+        //     }
+        //     
+        //     // Create a row array based on the defined header order
+        //     var row = headers.map(function(header) { 
+        //       var value = parsedData[header];
+        //       if (Array.isArray(value)) {
+        //         return value.join(", "); // Convert arrays to comma-separated strings
+        //       }
+        //       return value !== undefined ? value : ""; // Handle missing fields
+        //     });
+        //     sheet.appendRow(row);
+        //
+        //     return ContentService.createTextOutput(JSON.stringify({status: "Success", dataReceived: parsedData})).setMimeType(ContentService.MimeType.JSON);
+        //   } catch (error) {
+        //     return ContentService.createTextOutput(JSON.stringify({status: "Error", message: error.toString()})).setMimeType(ContentService.MimeType.JSON);
+        //   }
+        // }
+        return Promise.resolve(); 
+    } catch (error) {
+        console.error('Fetch error to Google Sheets:', error);
+        return Promise.reject(error); 
+    }
+}
+
+function showConfirmationScreen() {
+    const formElement = document.getElementById('magnoliaClientProfileForm');
+    const confirmationSection = document.getElementById('magnolia-confirmationSection');
+    const elementsToHide = ['.magnolia-progress-container', '.magnolia-quick-options', '.magnolia-trust-indicators', '.magnolia-social-proof', '.magnolia-completion-indicator'];
+
+    if (formElement) formElement.style.display = 'none';
+    if (confirmationSection) confirmationSection.classList.remove('hidden');
+
+    elementsToHide.forEach(selector => {
+        const element = document.querySelector(selector);
+        if (element) element.style.display = 'none';
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function displayFormError(message) {
+    const submitButton = document.getElementById('submitForm');
+    if (!submitButton || !submitButton.parentNode) return;
+
+    let errorDiv = submitButton.parentNode.querySelector('.form-submit-error');
+    if (!errorDiv) {
+        errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message form-submit-error'; 
+        errorDiv.style.textAlign = 'center';
+        errorDiv.style.marginTop = '15px'; 
+        submitButton.parentNode.insertBefore(errorDiv, submitButton.nextSibling);
+    }
+    errorDiv.textContent = message;
+}
+
+
+function updateProgressIndicators(step) {
+    const totalSteps = 5; 
+
+    document.querySelectorAll('.magnolia-progress-step').forEach((stepEl, index) => {
+        const stepNumber = index + 1;
+        stepEl.classList.remove('active', 'completed');
+        if (stepNumber < step) {
+            stepEl.classList.add('completed');
+        } else if (stepNumber === step) {
+            stepEl.classList.add('active');
+        }
+    });
+
+    // Neuromarketing: Update active label in progress bar
+    document.querySelectorAll('.magnolia-progress-labels span').forEach(labelSpan => {
+        labelSpan.classList.remove('active-label');
+        if (parseInt(labelSpan.dataset.step) === step) {
+            labelSpan.classList.add('active-label');
+        }
+    });
+
+
+    const percentage = step > 1 ? Math.floor(((step - 1) / totalSteps) * 100) : 0;
+    const completionPercentageSpan = document.getElementById('completion-percentage');
+    const completionBarDiv = document.getElementById('completion-bar');
+
+    if (completionPercentageSpan) completionPercentageSpan.textContent = percentage;
+    if (completionBarDiv) completionBarDiv.style.width = `${percentage}%`;
+}
+
+function validateSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (!section) return true; 
+
+    let isValid = true;
+    section.querySelectorAll('.invalid, .invalid-label').forEach(el => el.classList.remove('invalid', 'invalid-label'));
+    section.querySelectorAll('.error-message').forEach(msg => msg.remove());
+
+    const requiredFields = section.querySelectorAll('input[required]:not([type="checkbox"]), select[required], textarea[required]');
+    requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+            isValid = false;
+            markFieldInvalid(field, 'This field is required.');
+        } else if (field.type === 'email' && !/^\S+@\S+\.\S+$/.test(field.value)) {
+            isValid = false;
+            markFieldInvalid(field, 'Please enter a valid email address.');
+        } else if (field.type === 'url' && field.value && !/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/.test(field.value)) {
+             if (field.required || field.value.length > 0) {
+                isValid = false;
+                markFieldInvalid(field, 'Please enter a valid URL (e.g., https://example.com).');
+            }
+        } else if (field.type === 'tel' && field.value && !/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/.test(field.value.trim())) {
+            if (field.required || field.value.length > 0) {
+                isValid = false;
+                markFieldInvalid(field, 'Please enter a valid phone number.');
+            }
+        }
+    });
+
+    const requiredCheckboxes = section.querySelectorAll('input[type="checkbox"][required]');
+    requiredCheckboxes.forEach(checkbox => {
+        if (!checkbox.checked) {
+            isValid = false;
+            markFieldInvalid(checkbox, 'You must agree to proceed.', true); 
+        }
+    });
+    
+    if (!isValid) {
+        const firstErrorField = section.querySelector('.invalid, input[type="checkbox"].invalid + label.invalid-label');
+        if (firstErrorField) {
+            const elementToScroll = firstErrorField.type === 'checkbox' ? firstErrorField.closest('.magnolia-checkbox-item') || firstErrorField : firstErrorField;
+            elementToScroll.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (typeof firstErrorField.focus === 'function' && firstErrorField.type !== 'checkbox') {
+                 setTimeout(() => firstErrorField.focus({ preventScroll: true }), 300); 
+            }
+        }
+    }
+    return isValid;
+}
+
+function markFieldInvalid(field, message, isCheckbox = false) {
+    field.classList.add('invalid');
+    let errorMsgElement = field.parentNode.querySelector(`.error-message[data-for="${field.id}"]`);
+
+    if (!errorMsgElement) {
+        errorMsgElement = document.createElement('div');
+        errorMsgElement.className = 'error-message';
+        errorMsgElement.dataset.for = field.id; 
+        errorMsgElement.textContent = message;
+
+        if (isCheckbox) {
+            const container = field.closest('.magnolia-checkbox-item') || field.parentNode;
+            container.parentNode.insertBefore(errorMsgElement, container.nextSibling);
+            const label = container.querySelector('label'); 
+            if (label) label.classList.add('invalid-label');
+        } else {
+            field.parentNode.insertBefore(errorMsgElement, field.nextSibling);
+        }
+    } else {
+        errorMsgElement.textContent = message;
+    }
+}
+
+
+function initSaveProgress() {
+    document.querySelectorAll('.magnolia-btn-save').forEach(button => {
+        button.addEventListener('click', function() {
+            saveFormData();
+            showSaveNotification();
+        });
+    });
+}
+
+function saveFormData() {
+    const form = document.getElementById('magnoliaClientProfileForm');
+    if (!form) return;
+
+    const formData = collectFormData(); 
+    const activeSection = form.querySelector('.magnolia-form-section.active');
+    const currentStep = activeSection ? parseInt(activeSection.id.replace('magnolia-section', ''), 10) : 1;
+
+    formData.magnoliaMeta = {
+        lastSaved: new Date().toISOString(),
+        currentStep: currentStep
+    };
+
+    try {
+        localStorage.setItem('magnoliaFormData', JSON.stringify(formData));
+    } catch (e) {
+        console.error('Error saving data to localStorage:', e);
+    }
+}
+
+function showSaveNotification() {
+    const notificationArea = document.getElementById('magnolia-notification-area');
+    if (!notificationArea) return;
+
+    const saveConfirmDiv = document.createElement('div');
+    saveConfirmDiv.className = 'magnolia-save-confirm'; 
+    saveConfirmDiv.innerHTML = `
+        <div class="magnolia-save-icon">💾</div> <div class="magnolia-save-message">
+            <p>Progress saved!</p>
+            </div>
+    `;
+    notificationArea.appendChild(saveConfirmDiv);
+
+    requestAnimationFrame(() => { 
+        saveConfirmDiv.classList.add('show');
+    });
+
+    setTimeout(() => {
+        if (saveConfirmDiv.parentNode) { 
+            saveConfirmDiv.classList.remove('show');
+            setTimeout(() => {
+                if (saveConfirmDiv.parentNode) {
+                    saveConfirmDiv.parentNode.removeChild(saveConfirmDiv);
+                }
+            }, 400); 
+        }
+    }, 4000); 
+}
+
+function checkForSavedProgress() {
+    try {
+        const savedDataString = localStorage.getItem('magnoliaFormData');
+        if (!savedDataString) return;
+
+        const savedData = JSON.parse(savedDataString);
+        const meta = savedData.magnoliaMeta;
+
+        if (meta && meta.lastSaved) {
+            const savedDate = new Date(meta.lastSaved);
+            const now = new Date();
+            const daysDifference = (now.getTime() - savedDate.getTime()) / (1000 * 60 * 60 * 24);
+
+            if (daysDifference < 7) {
+                if (typeof window.showRestoreProgressModal === 'function') {
+                    window.showRestoreProgressModal(savedData); 
+                } else {
+                    console.warn('showRestoreProgressModal function not found. Using localStorage.removeItem as fallback.');
+                    localStorage.removeItem('magnoliaFormData');
+                }
+            } else {
+                localStorage.removeItem('magnoliaFormData');
+            }
+        }
+    } catch (e) {
+        console.error('Error checking/loading saved progress from localStorage:', e);
+        try {
+            localStorage.removeItem('magnoliaFormData');
+        } catch (lsError) {
+            console.warn('Could not remove magnoliaFormData from localStorage during error handling:', lsError);
+        }
+    }
+}
+
+function loadSavedFormData(data) {
+    const form = document.getElementById('magnoliaClientProfileForm');
+    if (!form || !data) return;
+
+    Object.entries(data).forEach(([key, value]) => {
+        if (key === 'magnoliaMeta') return; 
+
+        if (Array.isArray(value)) { 
+            form.querySelectorAll(`input[name="${key}"]`).forEach(element => {
+                if (element.type === 'checkbox') {
+                    element.checked = value.includes(element.value);
+                    if (element.matches('#objective6, #system6')) {
+                        element.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                }
+            });
+        } else {
+            const field = form.querySelector(`[name="${key}"]`);
+            if (field) {
+                if (field.type === 'checkbox') { 
+                    field.checked = !!value; 
+                } else {
+                    field.value = value;
+                }
+                if (field.matches('#objectiveOther, #systemOther')) {
+                    const correspondingCheckboxId = key === 'objectiveOther' ? 'objective6' : 'system6';
+                    const checkbox = document.getElementById(correspondingCheckboxId);
+                    if(checkbox) checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            }
+        }
+    });
+
+    const savedStep = data.magnoliaMeta?.currentStep || 1;
+    document.querySelectorAll('.magnolia-form-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    const targetSection = document.getElementById(`magnolia-section${savedStep}`);
+    if (targetSection) {
+        targetSection.classList.add('active');
+    } else {
+        const firstSection = document.getElementById('magnolia-section1');
+        if (firstSection) firstSection.classList.add('active');
+    }
+    updateProgressIndicators(savedStep); 
+}
+
+function initRestoreProgressModal() {
+    const modal = document.getElementById('restoreProgressModal');
+    if (!modal) {
+        console.warn('Restore progress modal not found.');
+        return;
+    }
+    const closeBtn = modal.querySelector('.magnolia-modal-close');
+    const yesBtn = document.getElementById('restoreProgressYes');
+    const noBtn = document.getElementById('restoreProgressNo');
+    let currentSavedData = null;
+
+    const openModal = (savedData) => {
+        currentSavedData = savedData;
+        modal.style.display = 'flex';
+        requestAnimationFrame(() => modal.classList.add('show'));
+        document.body.classList.add('modal-open');
+    };
+
+    const closeModal = () => {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+        document.body.classList.remove('modal-open');
+        currentSavedData = null; 
+    };
+
+    if (closeBtn) closeBtn.addEventListener('click', () => {
+        localStorage.removeItem('magnoliaFormData'); 
+        closeModal();
+    });
+    if (yesBtn) yesBtn.addEventListener('click', () => {
+        if (currentSavedData) {
+            loadSavedFormData(currentSavedData);
+        }
+        closeModal();
+    });
+    if (noBtn) noBtn.addEventListener('click', () => {
+        localStorage.removeItem('magnoliaFormData');
+        closeModal();
+    });
+    
+    window.showRestoreProgressModal = openModal;
+}
+
+
+function initDemoModal() {
+    const demoBtn = document.getElementById('scheduleDemoBtn');
+    const demoModal = document.getElementById('demoModal');
+    if (!demoBtn || !demoModal) {
+        console.warn('Demo modal elements not found.');
+        return;
+    }
+
+    const closeBtn = demoModal.querySelector('.magnolia-modal-close');
+    const demoForm = document.getElementById('demoRequestForm');
+
+    const openModal = () => {
+        demoModal.style.display = 'flex'; 
+        requestAnimationFrame(() => { 
+            demoModal.classList.add('show');
+        });
+        document.body.classList.add('modal-open');
+    };
+    
+    const closeModal = () => {
+        demoModal.classList.remove('show');
+        setTimeout(() => {
+            demoModal.style.display = 'none'; 
+        }, 300); 
+        document.body.classList.remove('modal-open');
+    };
+
+    demoBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    demoModal.addEventListener('click', (e) => { 
+        if (e.target === demoModal) closeModal();
+    });
+
+    if (demoForm) {
+        demoForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            let demoValid = true;
+            demoForm.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+            demoForm.querySelectorAll('.error-message').forEach(el => el.remove());
+
+            demoForm.querySelectorAll('input[required]').forEach(field => {
+                if (!field.value.trim()) {
+                    demoValid = false;
+                    markFieldInvalid(field, 'This field is required.'); 
+                } else if (field.type === 'email' && !/^\S+@\S+\.\S+$/.test(field.value)) {
+                    demoValid = false;
+                    markFieldInvalid(field, 'Please enter a valid email.');
+                }
+            });
+            if (!demoValid) return;
+
+            const submitDemoBtn = demoForm.querySelector('.magnolia-btn-submit');
+            if(submitDemoBtn) {
+                submitDemoBtn.disabled = true;
+                submitDemoBtn.textContent = 'Sending...';
+            }
+
+            const formData = new FormData(demoForm);
+            const data = Object.fromEntries(formData.entries());
+            data.formType = 'demo_request'; 
+            data.timestamp = new Date().toISOString();
+
+            try {
+                await submitToGoogleSheets(data); 
+                const modalContent = demoModal.querySelector('.magnolia-modal-content');
+                if (modalContent) {
+                    modalContent.innerHTML = `
+                        <button type="button" class="magnolia-modal-close" aria-label="Close modal">&times;</button> 
+                        <div class="magnolia-success-message">
+                            <div class="magnolia-confirmation-icon">✅</div>
+                            <h3>Demo Request Received!</h3>
+                            <p>Thank you! We'll contact you within 1 business day to schedule your personalized demo.</p>
+                        </div>`;
+                    const newCloseBtn = modalContent.querySelector('.magnolia-modal-close');
+                    if (newCloseBtn) newCloseBtn.addEventListener('click', closeModal);
+                }
+                setTimeout(closeModal, 4000); 
+            } catch (error) {
+                console.error('Demo request submission error:', error);
+                if(submitDemoBtn) {
+                    submitDemoBtn.disabled = false;
+                    submitDemoBtn.textContent = 'Request Demo';
+                }
+                let errorDisplay = demoForm.querySelector('.demo-error-message');
+                if (!errorDisplay) {
+                    errorDisplay = document.createElement('p');
+                    errorDisplay.className = 'error-message demo-error-message'; 
+                    errorDisplay.style.textAlign = 'center';
+                    demoForm.appendChild(errorDisplay);
+                }
+                errorDisplay.textContent = 'Could not submit request. Please try again.';
+            }
+        });
+    }
+}
+
+function initExitIntent() {
+    const exitPopup = document.getElementById('exitPopup');
+    if (!exitPopup) {
+        console.warn('Exit intent popup not found.');
+        return;
+    }
+
+    const closeBtn = exitPopup.querySelector('.magnolia-exit-close');
+    const exitForm = document.getElementById('exitIntentForm');
+    const submitButton = document.getElementById('exitSubmit'); 
+
+    let exitShownThisSession = false; 
+
+    const showExitPopup = () => {
+        if (exitShownThisSession || document.body.classList.contains('modal-open')) return; 
+        exitPopup.style.display = 'flex';
+        requestAnimationFrame(() => {
+            exitPopup.classList.add('show');
+        });
+        exitShownThisSession = true; 
+        document.body.classList.add('modal-open'); 
+    };
+
+    const closeExitPopup = () => {
+        exitPopup.classList.remove('show');
+        setTimeout(() => {
+            exitPopup.style.display = 'none';
+        }, 400); 
+        document.body.classList.remove('modal-open');
+    };
+
+    document.addEventListener('mouseleave', (e) => {
+        if (e.clientY < 10 && !exitPopup.classList.contains('show')) { 
+            setTimeout(showExitPopup, 150); 
+        }
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeExitPopup);
+    }
+
+    if (submitButton && exitForm) {
+        submitButton.addEventListener('click', async () => { 
+            exitForm.querySelectorAll('.invalid').forEach(el => el.classList.remove('invalid'));
+            exitForm.querySelectorAll('.error-message').forEach(el => el.remove());
+
+            const emailField = exitForm.querySelector('#exitEmail');
+            if (emailField && !emailField.value.trim()) {
+                markFieldInvalid(emailField, 'Email is required.');
+                return;
+            }
+            if (emailField && emailField.type === 'email' && !/^\S+@\S+\.\S+$/.test(emailField.value)) {
+                markFieldInvalid(emailField, 'Please enter a valid email.');
+                return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+
+            const formData = new FormData(exitForm);
+            const data = Object.fromEntries(formData.entries());
+            data.formType = 'exit_intent_lead'; 
+            data.timestamp = new Date().toISOString();
+
+            try {
+                await submitToGoogleSheets(data);
+                const formContainer = exitPopup.querySelector('.magnolia-exit-form'); 
+                if (formContainer) {
+                    formContainer.innerHTML = `
+                        <div class="magnolia-success-message">
+                            <div class="magnolia-confirmation-icon">✅</div>
+                            <h3>Success!</h3>
+                            <p>Your free guide is on its way to your inbox.</p>
+                        </div>`;
+                }
+                setTimeout(closeExitPopup, 4000); 
+            } catch (error) {
+                console.error('Exit intent form submission error:', error);
+                submitButton.disabled = false;
+                submitButton.textContent = 'Send Me the Guide';
+                 let errorDisplay = exitForm.querySelector('.exit-error-message');
+                if (!errorDisplay) {
+                    errorDisplay = document.createElement('p');
+                    errorDisplay.className = 'error-message exit-error-message';
+                    errorDisplay.style.textAlign = 'center';
+                    exitForm.appendChild(errorDisplay);
+                }
+                errorDisplay.textContent = 'Could not send. Please try again.';
+            }
+        });
+    }
+}
+
+
+function initConditionalInputs() {
+    const handleConditionalInput = (checkboxId, inputId) => {
+        const checkbox = document.getElementById(checkboxId);
+        const input = document.getElementById(inputId);
+        if (!checkbox || !input) {
+            return;
+        }
+
+        const toggleInput = () => {
+            const isChecked = checkbox.checked;
+            input.style.display = isChecked ? 'block' : 'none';
+            input.required = isChecked; 
+            if (!isChecked) {
+                input.value = ''; 
+                input.classList.remove('invalid');
+                const errorMsg = input.parentNode.querySelector(`.error-message[data-for="${input.id}"]`);
+                if (errorMsg) errorMsg.remove();
+            }
+        };
+
+        checkbox.addEventListener('change', toggleInput);
+        toggleInput(); 
+    };
+
+    handleConditionalInput('objective6', 'objectiveOther'); 
+    handleConditionalInput('system6', 'systemOther');    
+}
+
+function initFormValidation() {
+    const form = document.getElementById('magnoliaClientProfileForm');
+    if (!form) return;
+
+    form.addEventListener('input', (e) => {
+        const target = e.target;
+        if (target.matches('input, select, textarea')) {
+            if (target.classList.contains('invalid')) {
+                target.classList.remove('invalid');
+                const label = target.closest('.magnolia-form-group')?.querySelector(`label[for="${target.id}"]`);
+                if (label) label.classList.remove('invalid-label');
+            }
+            const errorMsg = target.parentNode.querySelector(`.error-message[data-for="${target.id}"]`);
+            if (errorMsg) {
+                errorMsg.remove();
+            }
+        }
+    });
+     form.addEventListener('change', (e) => { 
+        const target = e.target;
+        if (target.type === 'checkbox' && target.classList.contains('invalid')) {
+            target.classList.remove('invalid');
+            const label = target.closest('.magnolia-checkbox-item')?.querySelector('label');
+            if (label) label.classList.remove('invalid-label');
+            const errorMsg = target.closest('.magnolia-checkbox-item')?.parentNode.querySelector(`.error-message[data-for="${target.id}"]`);
+            if (errorMsg) errorMsg.remove();
+        }
+    });
+}
+
+
+function initSlider() {
+    const sliderContainer = document.querySelector('.magnolia-testimonial-slider');
+    const dotsContainer = document.querySelector('.magnolia-testimonial-dots');
+    if (!sliderContainer || !dotsContainer) {
+        return;
+    }
+
+    const slides = Array.from(sliderContainer.querySelectorAll('.magnolia-testimonial-slide'));
+    const dots = Array.from(dotsContainer.querySelectorAll('.magnolia-dot'));
+
+    if (slides.length === 0 || slides.length !== dots.length) {
+        return;
+    }
+
+    let currentSlideIndex = 0;
+    let slideIntervalId = null;
+
+    const showSlide = (index) => {
+        slides.forEach((slide, i) => {
+            slide.style.display = (i === index) ? 'block' : 'none'; 
+            dots[i].classList.toggle('active', i === index);
+        });
+        currentSlideIndex = index;
+    };
+
+    const nextSlide = () => {
+        const nextIndex = (currentSlideIndex + 1) % slides.length;
+        showSlide(nextIndex);
+    };
+
+    const startAutoPlay = (interval = 7000) => { 
+        clearInterval(slideIntervalId); 
+        slideIntervalId = setInterval(nextSlide, interval);
+    };
+
+    const stopAutoPlay = () => {
+        clearInterval(slideIntervalId);
+    };
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showSlide(index);
+            startAutoPlay(); 
+        });
+    });
+
+    sliderContainer.addEventListener('mouseenter', stopAutoPlay);
+    sliderContainer.addEventListener('mouseleave', startAutoPlay);
+    dotsContainer.addEventListener('mouseenter', stopAutoPlay); 
+    dotsContainer.addEventListener('mouseleave', startAutoPlay);
+
+    showSlide(0); 
+    startAutoPlay(); 
+}
+
+function initFomoNotifications() {
+    const fomoContainer = document.getElementById('magnoliaFomoContainer');
+    if (!fomoContainer) {
+        return;
+    }
+
+    const notifications = [
+        { city: "New York, USA", action: "just completed their profile" },
+        { city: "London, UK", action: "just scheduled a demo" },
+        { city: "Austin, USA", action: "just started their AI implementation" },
+        { city: "Paris, France", action: "just received their custom AI roadmap" },
+        { city: "Sydney, AUS", action: "just completed their profile" },
+        { city: "Berlin, DE", action: "is exploring AI solutions" },
+        { city: "Toronto, CAN", action: "just upgraded their AI plan" }
+    ];
+    let notificationIndex = 0;
+    let fomoIntervalId = null;
+
+    const showFomoNotification = () => {
+        if (document.body.classList.contains('modal-open')) return;
+
+        const notificationData = notifications[notificationIndex];
+        notificationIndex = (notificationIndex + 1) % notifications.length;
+
+        const fomoNotif = document.createElement('div');
+        fomoNotif.className = 'magnolia-fomo-notification';
+        fomoNotif.innerHTML = `
+            <div class="magnolia-fomo-content">
+                <div class="magnolia-fomo-icon">👤</div> <div class="magnolia-fomo-message">
+                    Someone from <strong>${notificationData.city}</strong> ${notificationData.action}.
+                    <span class="magnolia-fomo-time">a few moments ago</span>
+                </div>
+            </div>
+            <button type="button" class="magnolia-fomo-close" aria-label="Close notification">&times;</button>
+        `;
+        fomoContainer.appendChild(fomoNotif);
+
+        requestAnimationFrame(() => {
+            fomoNotif.classList.add('show');
+        });
+
+        const closeBtn = fomoNotif.querySelector('.magnolia-fomo-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => removeFomoNotification(fomoNotif), { once: true });
+        }
+        setTimeout(() => {
+            removeFomoNotification(fomoNotif);
+        }, 6000); 
+    };
+
+    const removeFomoNotification = (element) => {
+        if (!element || !element.parentNode) return;
+        element.classList.remove('show');
+        setTimeout(() => {
+            if (element.parentNode) {
+                element.parentNode.removeChild(element);
+            }
+        }, 400); 
+    };
+
+    // UPDATED: Doubled initialDelay and interval for FOMO notifications
+    const startFomoCycle = (initialDelay = 20000, interval = 40000) => { 
+        clearTimeout(fomoIntervalId); 
+        setTimeout(() => {
+            showFomoNotification(); 
+            fomoIntervalId = setInterval(showFomoNotification, interval); 
+        }, initialDelay);
+    };
+    startFomoCycle(); 
+}
+</script>
+
+</body>
+</html>
